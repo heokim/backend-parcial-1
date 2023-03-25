@@ -1,0 +1,67 @@
+-- databasename: primerparcialbackend
+
+-- tabla clientes
+create table clientes(
+	cliente_id serial primary key,
+	tipo_documento varchar(100),
+	numero_documento varchar(100),
+	nombre varchar(100),
+	apellido varchar(100),
+	fecha_nacimiento date,
+	nacionalidad varchar(100),
+	mail varchar(100),
+	teléfono varchar(100)
+);
+
+-- tabla conceptos
+create table conceptos(
+	concepto_id serial primary key,
+	descripcion varchar(100) not null,
+	puntos_requeridos integer not null
+);
+
+-- tabla reglas
+create table reglas(
+	regla_id serial primary key,
+	limite_inferior integer,
+	limite_superior integer,
+	monto_equivalencia_por_punto integer not null
+);
+
+-- tabla vencimientos
+create table vencimientos(
+	vencimiento_id serial primary key,
+	fecha_inicio_validez date,
+	fecha_fin_validez date,
+	dias_restantes integer
+);
+
+-- tabla bolsas
+create table bolsas(
+	bolsa_id serial primary key,
+	cliente_id integer not null references clientes(cliente_id),
+	fecha_de_asignacion_de_puntaje timestamp without time zone,
+	fecha_de_caducidad_de_puntaje timestamp without time zone,
+	puntaje_asignado integer not null,
+	puntaje_utilizado integer default '0',
+	saldo_de_puntos integer not null,
+	monto_de_la_operación integer not null,
+	estado boolean	 
+);
+
+-- tabla uso_de_puntos: cabecera y detalles
+-- drop table uso_de_puntos_detalles, uso_de_puntos ;
+create table uso_de_puntos(
+	cabecera_id serial primary key,
+	cliente_id integer not null references clientes(cliente_id),
+	concepto_id integer not null references conceptos(concepto_id),
+	fecha timestamp without time zone,
+	puntaje_utilizado integer
+)
+
+create table uso_de_puntos_detalles(
+	detalle_id serial primary key,
+	cabecera_id integer not null references uso_de_puntos(cabecera_id),
+	bolsa_id integer not null references bolsas(bolsa_id),
+	puntaje_utizado integer not null
+)
