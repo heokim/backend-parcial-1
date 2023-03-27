@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "facd25bc-360d-4d83-8c44-c693cdd1933d",
+		"name": "PrimerParcialBackend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Listar Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoDocumento\":\"CI\",\r\n    \"numeroDocumento\":\"5574180\",\r\n    \"nombre\":\"Andres\",\r\n    \"apellido\":\"Heo Kim\",\r\n    \"nacionalidad\":\"Paraguaya\",\r\n    \"fechaNacimiento\":\"1999-01-01\",\r\n    \"mail\":\"andressshk@gmail.com\",\r\n    \"telefono\":\"0971850995\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
