@@ -48,7 +48,7 @@ public class Conceptos implements Serializable {
     @NotNull
     @Column(name = "puntos_requeridos")
     private int puntosRequeridos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conceptoId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conceptoId", fetch = FetchType.LAZY)
     private List<UsoDePuntos> usoDePuntosList;
 
     public Conceptos() {

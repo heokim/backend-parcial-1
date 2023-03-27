@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Clientes.findByFechaNacimiento", query = "SELECT c FROM Clientes c WHERE c.fechaNacimiento = :fechaNacimiento"),
     @NamedQuery(name = "Clientes.findByNacionalidad", query = "SELECT c FROM Clientes c WHERE c.nacionalidad = :nacionalidad"),
     @NamedQuery(name = "Clientes.findByMail", query = "SELECT c FROM Clientes c WHERE c.mail = :mail"),
-    @NamedQuery(name = "Clientes.findByTel\u00e9fono", query = "SELECT c FROM Clientes c WHERE c.tel\u00e9fono = :tel\u00e9fono")})
+    @NamedQuery(name = "Clientes.findByTelefono", query = "SELECT c FROM Clientes c WHERE c.telefono = :telefono")})
 public class Clientes implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,11 +69,11 @@ public class Clientes implements Serializable {
     @Column(name = "mail")
     private String mail;
     @Size(max = 100)
-    @Column(name = "tel\u00e9fono")
-    private String teléfono;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.EAGER)
+    @Column(name = "telefono")
+    private String telefono;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.LAZY)
     private List<UsoDePuntos> usoDePuntosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.LAZY)
     private List<Bolsas> bolsasList;
 
     public Clientes() {
@@ -147,12 +147,12 @@ public class Clientes implements Serializable {
         this.mail = mail;
     }
 
-    public String getTeléfono() {
-        return teléfono;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setTeléfono(String teléfono) {
-        this.teléfono = teléfono;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     @XmlTransient

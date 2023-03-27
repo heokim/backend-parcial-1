@@ -10,7 +10,7 @@ create table clientes(
 	fecha_nacimiento date,
 	nacionalidad varchar(100),
 	mail varchar(100),
-	teléfono varchar(100)
+	telefono varchar(100)
 );
 
 -- tabla conceptos

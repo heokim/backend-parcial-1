@@ -40,10 +40,10 @@ public class UsoDePuntosDetalles implements Serializable {
     @Column(name = "puntaje_utizado")
     private int puntajeUtizado;
     @JoinColumn(name = "bolsa_id", referencedColumnName = "bolsa_id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Bolsas bolsaId;
     @JoinColumn(name = "cabecera_id", referencedColumnName = "cabecera_id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private UsoDePuntos cabeceraId;
 
     public UsoDePuntosDetalles() {

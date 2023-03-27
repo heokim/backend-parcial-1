@@ -108,5 +108,5 @@ public class Vencimientos implements Serializable {
     public String toString() {
         return "pol.edu.py.primerparcialbackend.model.Vencimientos[ vencimientoId=" + vencimientoId + " ]";
     }
-
+    
 }
