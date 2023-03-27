@@ -1,5 +1,8 @@
 package pol.edu.py.primerparcialbackend.ejb;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +23,24 @@ public class ClientesDAO extends AbstractDAO<Clientes> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+     public List<Clientes> findByDiasRestantesVencimiento(int dias) {
+        // calcular max fecha de vencimiento (actual + dias)
+        Date fechaActual = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaActual);
+        calendar.add(Calendar.DAY_OF_YEAR, dias);
+        
+        
+        return em.createQuery(
+                "SELECT c FROM Clientes c, Bolsas b "
+                        + "WHERE b.clienteId = c.clienteId "
+                        + "AND b.fechaDeCaducidadDePuntaje BETWEEN :fecha_actual AND :fecha_vencimiento "
+                        + "AND b.estado = true")
+                .setParameter("fecha_actual", fechaActual)
+                .setParameter("fecha_vencimiento", calendar.getTime())
+                .getResultList();
     }
 
 }

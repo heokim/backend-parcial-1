@@ -18,6 +18,7 @@ public class ConsultasRest {
 
     @Inject
     ClientesDAO clientesDAO;
+    
     @Inject
     BolsasDAO bolsasDAO;
 
@@ -28,6 +29,13 @@ public class ConsultasRest {
             @QueryParam("limite_inferior") int limiteInferior,
             @QueryParam("limite_superior") int limiteSuperior) {
         return Response.ok(bolsasDAO.findByClientIdAndRange(id, limiteInferior, limiteSuperior)).build();
+    }
+    
+    @GET
+    @Path("vencimientos")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response findById(@QueryParam("dias") int dias) {
+        return Response.ok(clientesDAO.findByDiasRestantesVencimiento(dias)).build();
     }
 
 }
