@@ -201,15 +201,15 @@ public class Clientes implements Serializable {
     public String toJson() {
         StringBuilder str = new StringBuilder();
         str.append("Clientes:{\n");
-        str.append("clienteId: ").append(clienteId != null ? clienteId : null).append(",\n");
-        str.append("tipoDocumento: ").append(tipoDocumento != null ? tipoDocumento : null).append(",\n");
-        str.append("numeroDocumento: ").append(numeroDocumento != null ? numeroDocumento : null).append(",\n");
-        str.append("nombre: ").append(nombre != null ? nombre : null).append(",\n");
-        str.append("apellido: ").append(apellido != null ? apellido : null).append(",\n");
-        str.append("fechaNacimiento: ").append(fechaNacimiento != null ? fechaNacimiento : null).append(",\n");
-        str.append("nacionalidad: ").append(nacionalidad != null ? nacionalidad : null).append(",\n");
-        str.append("mail: ").append(mail != null ? mail : null).append(",\n");
-        str.append("telefono: ").append(telefono != null ? telefono : null).append(",\n");
+        str.append("\tclienteId: ").append(clienteId != null ? clienteId : null).append(",\n");
+        str.append("\ttipoDocumento: ").append(tipoDocumento != null ? tipoDocumento : null).append(",\n");
+        str.append("\tnumeroDocumento: ").append(numeroDocumento != null ? numeroDocumento : null).append(",\n");
+        str.append("\tnombre: ").append(nombre != null ? nombre : null).append(",\n");
+        str.append("\tapellido: ").append(apellido != null ? apellido : null).append(",\n");
+        str.append("\tfechaNacimiento: ").append(fechaNacimiento != null ? fechaNacimiento : null).append(",\n");
+        str.append("\tnacionalidad: ").append(nacionalidad != null ? nacionalidad : null).append(",\n");
+        str.append("\tmail: ").append(mail != null ? mail : null).append(",\n");
+        str.append("\ttelefono: ").append(telefono != null ? telefono : null).append(",\n");
 //        str.append("usoDePuntosList: ").append(usoDePuntosList != null ? usoDePuntosList : null).append(",\n");
 //        str.append("bolsasList: ").append(bolsasList != null ? bolsasList : null);
         str.append("}");
