@@ -35,6 +35,8 @@ public class UsoDePuntosDetalles implements Serializable {
     @Basic(optional = false)
     @Column(name = "detalle_id")
     private Integer detalleId;
+    @Column(name = "cabecera_id")
+    private Integer cabeceraId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "puntaje_utizado")
@@ -42,9 +44,8 @@ public class UsoDePuntosDetalles implements Serializable {
     @JoinColumn(name = "bolsa_id", referencedColumnName = "bolsa_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Bolsas bolsaId;
-    @JoinColumn(name = "cabecera_id", referencedColumnName = "cabecera_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private UsoDePuntos cabeceraId;
+//    @JoinColumn(name = "cabecera_id", referencedColumnName = "cabecera_id")
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
 
     public UsoDePuntosDetalles() {
     }
@@ -82,11 +83,11 @@ public class UsoDePuntosDetalles implements Serializable {
         this.bolsaId = bolsaId;
     }
 
-    public UsoDePuntos getCabeceraId() {
+    public Integer getCabeceraId() {
         return cabeceraId;
     }
 
-    public void setCabeceraId(UsoDePuntos cabeceraId) {
+    public void setCabeceraId(Integer cabeceraId) {
         this.cabeceraId = cabeceraId;
     }
 
