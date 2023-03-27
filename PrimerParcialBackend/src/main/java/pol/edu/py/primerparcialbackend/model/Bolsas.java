@@ -48,6 +48,9 @@ public class Bolsas implements Serializable {
     @Basic(optional = false)
     @Column(name = "bolsa_id")
     private Integer bolsaId;
+    @NotNull
+    @Column(name = "cliente_id")
+    private Integer clienteId;
     @Column(name = "fecha_de_asignacion_de_puntaje")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaDeAsignacionDePuntaje;
@@ -70,11 +73,8 @@ public class Bolsas implements Serializable {
     private int montoDeLaOperacion;
     @Column(name = "estado")
     private Boolean estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsaId", fetch = FetchType.EAGER)
-    private List<UsoDePuntosDetalles> usoDePuntosDetallesList;
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Clientes clienteId;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsaId", fetch = FetchType.EAGER)
+//    private List<UsoDePuntosDetalles> usoDePuntosDetallesList;
 
     public Bolsas() {
     }
@@ -154,20 +154,20 @@ public class Bolsas implements Serializable {
         this.estado = estado;
     }
 
-    @XmlTransient
-    public List<UsoDePuntosDetalles> getUsoDePuntosDetallesList() {
-        return usoDePuntosDetallesList;
-    }
+//    @XmlTransient
+//    public List<UsoDePuntosDetalles> getUsoDePuntosDetallesList() {
+//        return usoDePuntosDetallesList;
+//    }
+//
+//    public void setUsoDePuntosDetallesList(List<UsoDePuntosDetalles> usoDePuntosDetallesList) {
+//        this.usoDePuntosDetallesList = usoDePuntosDetallesList;
+//    }
 
-    public void setUsoDePuntosDetallesList(List<UsoDePuntosDetalles> usoDePuntosDetallesList) {
-        this.usoDePuntosDetallesList = usoDePuntosDetallesList;
-    }
-
-    public Clientes getClienteId() {
+    public Integer getClienteId() {
         return clienteId;
     }
 
-    public void setClienteId(Clientes clienteId) {
+    public void setClienteId(Integer clienteId) {
         this.clienteId = clienteId;
     }
 
