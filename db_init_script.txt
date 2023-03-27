@@ -45,7 +45,7 @@ create table bolsas(
 	puntaje_asignado integer not null,
 	puntaje_utilizado integer default '0',
 	saldo_de_puntos integer not null,
-	monto_de_la_operación integer not null,
+	monto_de_la_operacion integer not null,
 	estado boolean	 
 );
 
@@ -57,11 +57,11 @@ create table uso_de_puntos(
 	concepto_id integer not null references conceptos(concepto_id),
 	fecha timestamp without time zone,
 	puntaje_utilizado integer
-)
+);
 
 create table uso_de_puntos_detalles(
 	detalle_id serial primary key,
 	cabecera_id integer not null references uso_de_puntos(cabecera_id),
 	bolsa_id integer not null references bolsas(bolsa_id),
-	puntaje_utizado integer not null
-)
+	puntaje_utilizado integer not null
+);
