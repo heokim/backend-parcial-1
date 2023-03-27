@@ -19,7 +19,7 @@ TP_1-back-end
 		Listado de clientes: 		/api/clientes			GET
 		Un cliente por id:			/api/clientes/{id}		GET
 		Agregar	un clientes:		/api/clientes			POST
-		Editar un cliente: 			/api/clientes/{id}		PUT
+		Editar un cliente: 			/api/clientes			PUT
 		Eliminar un cliente: 		/api/clientes/{id}		DELETE
 
 2- Administración de conceptos de uso de puntos (POST,GET,PUT, DELETE)
@@ -35,7 +35,7 @@ TP_1-back-end
 		Listar conceptos: 		/api/conceptos			GET
 		Un concepto por id: 	/api/conceptos/{id} 	GET
 		Agregar un concepto: 	/api/conceptos			POST
-		Editar un concepto:		/api/conceptos/{id} 	PUT
+		Editar un concepto:		/api/conceptos/		 	PUT
 		Eliminar un concepto: 	/api/conceptos/{id}		DELETE
 
 3- Administración de reglas de asignación de puntos (POST,GET,PUT, DELETE)
@@ -52,7 +52,7 @@ TP_1-back-end
 		Listar reglas: 			/api/reglas			GET
 		Un regla por id: 		/api/reglas/{id} 	GET
 		Agregar un regla: 		/api/reglas			POST
-		Editar un regla:		/api/reglas/{id} 	PUT
+		Editar un regla:		/api/reglas		 	PUT
 		Eliminar un regla: 		/api/reglas/{id}	DELETE
 
 
@@ -72,7 +72,7 @@ TP_1-back-end
 		Listar vencimientos: 		/api/vencimientos			GET
 		Un vencimiento por id: 		/api/vencimientos/{id}	 	GET
 		Agregar un vencimiento: 	/api/vencimientos			POST
-		Editar un vencimiento:		/api/vencimientos/{id}		PUT
+		Editar un vencimiento:		/api/vencimientos			PUT
 		Eliminar un vencimiento: 	/api/vencimientos/{id}		DELETE
 
 	json
