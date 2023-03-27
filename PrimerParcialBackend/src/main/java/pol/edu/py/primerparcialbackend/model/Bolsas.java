@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Bolsas.findByPuntajeAsignado", query = "SELECT b FROM Bolsas b WHERE b.puntajeAsignado = :puntajeAsignado"),
     @NamedQuery(name = "Bolsas.findByPuntajeUtilizado", query = "SELECT b FROM Bolsas b WHERE b.puntajeUtilizado = :puntajeUtilizado"),
     @NamedQuery(name = "Bolsas.findBySaldoDePuntos", query = "SELECT b FROM Bolsas b WHERE b.saldoDePuntos = :saldoDePuntos"),
-    @NamedQuery(name = "Bolsas.findByMontoDeLaOperaci\u00f3n", query = "SELECT b FROM Bolsas b WHERE b.montoDeLaOperaci\u00f3n = :montoDeLaOperaci\u00f3n"),
+    @NamedQuery(name = "Bolsas.findByMontoDeLaOperacion", query = "SELECT b FROM Bolsas b WHERE b.montoDeLaOperacion = :montoDeLaOperacion"),
     @NamedQuery(name = "Bolsas.findByEstado", query = "SELECT b FROM Bolsas b WHERE b.estado = :estado")})
 public class Bolsas implements Serializable {
 
@@ -66,14 +66,14 @@ public class Bolsas implements Serializable {
     private int saldoDePuntos;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "monto_de_la_operaci\u00f3n")
-    private int montoDeLaOperación;
+    @Column(name = "monto_de_la_operacion")
+    private int montoDeLaOperacion;
     @Column(name = "estado")
     private Boolean estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsaId", fetch = FetchType.EAGER)
     private List<UsoDePuntosDetalles> usoDePuntosDetallesList;
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clientes clienteId;
 
     public Bolsas() {
@@ -83,11 +83,11 @@ public class Bolsas implements Serializable {
         this.bolsaId = bolsaId;
     }
 
-    public Bolsas(Integer bolsaId, int puntajeAsignado, int saldoDePuntos, int montoDeLaOperación) {
+    public Bolsas(Integer bolsaId, int puntajeAsignado, int saldoDePuntos, int montoDeLaOperacion) {
         this.bolsaId = bolsaId;
         this.puntajeAsignado = puntajeAsignado;
         this.saldoDePuntos = saldoDePuntos;
-        this.montoDeLaOperación = montoDeLaOperación;
+        this.montoDeLaOperacion = montoDeLaOperacion;
     }
 
     public Integer getBolsaId() {
@@ -138,12 +138,12 @@ public class Bolsas implements Serializable {
         this.saldoDePuntos = saldoDePuntos;
     }
 
-    public int getMontoDeLaOperación() {
-        return montoDeLaOperación;
+    public int getMontoDeLaOperacion() {
+        return montoDeLaOperacion;
     }
 
-    public void setMontoDeLaOperación(int montoDeLaOperación) {
-        this.montoDeLaOperación = montoDeLaOperación;
+    public void setMontoDeLaOperacion(int montoDeLaOperacion) {
+        this.montoDeLaOperacion = montoDeLaOperacion;
     }
 
     public Boolean getEstado() {

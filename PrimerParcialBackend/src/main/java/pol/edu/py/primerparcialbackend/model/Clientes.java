@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Clientes.findByFechaNacimiento", query = "SELECT c FROM Clientes c WHERE c.fechaNacimiento = :fechaNacimiento"),
     @NamedQuery(name = "Clientes.findByNacionalidad", query = "SELECT c FROM Clientes c WHERE c.nacionalidad = :nacionalidad"),
     @NamedQuery(name = "Clientes.findByMail", query = "SELECT c FROM Clientes c WHERE c.mail = :mail"),
-    @NamedQuery(name = "Clientes.findByTel\u00e9fono", query = "SELECT c FROM Clientes c WHERE c.tel\u00e9fono = :tel\u00e9fono")})
+    @NamedQuery(name = "Clientes.findByTelefono", query = "SELECT c FROM Clientes c WHERE c.telefono = :telefono")})
 public class Clientes implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,12 +69,12 @@ public class Clientes implements Serializable {
     @Column(name = "mail")
     private String mail;
     @Size(max = 100)
-    @Column(name = "tel\u00e9fono")
-    private String teléfono;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.EAGER)
-    private List<UsoDePuntos> usoDePuntosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.EAGER)
-    private List<Bolsas> bolsasList;
+    @Column(name = "telefono")
+    private String telefono;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.LAZY)
+//    private List<UsoDePuntos> usoDePuntosList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.LAZY)
+//    private List<Bolsas> bolsasList;
 
     public Clientes() {
     }
@@ -147,31 +147,31 @@ public class Clientes implements Serializable {
         this.mail = mail;
     }
 
-    public String getTeléfono() {
-        return teléfono;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setTeléfono(String teléfono) {
-        this.teléfono = teléfono;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    @XmlTransient
-    public List<UsoDePuntos> getUsoDePuntosList() {
-        return usoDePuntosList;
-    }
-
-    public void setUsoDePuntosList(List<UsoDePuntos> usoDePuntosList) {
-        this.usoDePuntosList = usoDePuntosList;
-    }
-
-    @XmlTransient
-    public List<Bolsas> getBolsasList() {
-        return bolsasList;
-    }
-
-    public void setBolsasList(List<Bolsas> bolsasList) {
-        this.bolsasList = bolsasList;
-    }
+//    @XmlTransient
+//    public List<UsoDePuntos> getUsoDePuntosList() {
+//        return usoDePuntosList;
+//    }
+//
+//    public void setUsoDePuntosList(List<UsoDePuntos> usoDePuntosList) {
+//        this.usoDePuntosList = usoDePuntosList;
+//    }
+//
+//    @XmlTransient
+//    public List<Bolsas> getBolsasList() {
+//        return bolsasList;
+//    }
+//
+//    public void setBolsasList(List<Bolsas> bolsasList) {
+//        this.bolsasList = bolsasList;
+//    }
 
     @Override
     public int hashCode() {
@@ -196,6 +196,24 @@ public class Clientes implements Serializable {
     @Override
     public String toString() {
         return "pol.edu.py.primerparcialbackend.model.Clientes[ clienteId=" + clienteId + " ]";
+    }
+
+    public String toJson() {
+        StringBuilder str = new StringBuilder();
+        str.append("Clientes:{\n");
+        str.append("\tclienteId: ").append(clienteId != null ? clienteId : null).append(",\n");
+        str.append("\ttipoDocumento: ").append(tipoDocumento != null ? tipoDocumento : null).append(",\n");
+        str.append("\tnumeroDocumento: ").append(numeroDocumento != null ? numeroDocumento : null).append(",\n");
+        str.append("\tnombre: ").append(nombre != null ? nombre : null).append(",\n");
+        str.append("\tapellido: ").append(apellido != null ? apellido : null).append(",\n");
+        str.append("\tfechaNacimiento: ").append(fechaNacimiento != null ? fechaNacimiento : null).append(",\n");
+        str.append("\tnacionalidad: ").append(nacionalidad != null ? nacionalidad : null).append(",\n");
+        str.append("\tmail: ").append(mail != null ? mail : null).append(",\n");
+        str.append("\ttelefono: ").append(telefono != null ? telefono : null).append(",\n");
+//        str.append("usoDePuntosList: ").append(usoDePuntosList != null ? usoDePuntosList : null).append(",\n");
+//        str.append("bolsasList: ").append(bolsasList != null ? bolsasList : null);
+        str.append("}");
+        return str.toString();
     }
 
 }

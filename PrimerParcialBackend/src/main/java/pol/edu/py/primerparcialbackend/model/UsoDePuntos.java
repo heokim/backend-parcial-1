@@ -48,12 +48,12 @@ public class UsoDePuntos implements Serializable {
     @Column(name = "puntaje_utilizado")
     private Integer puntajeUtilizado;
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clientes clienteId;
     @JoinColumn(name = "concepto_id", referencedColumnName = "concepto_id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Conceptos conceptoId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cabeceraId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cabeceraId", fetch = FetchType.LAZY)
     private List<UsoDePuntosDetalles> usoDePuntosDetallesList;
 
     public UsoDePuntos() {

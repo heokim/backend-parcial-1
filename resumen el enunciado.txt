@@ -1,0 +1,199 @@
+TP_1-back-end
+
+1- Administración de datos del cliente (POST,GET,PUT, DELETE)
+
+	Clientes (clientes del sistema)
+	---------------------------------------
+	cliente_id				integer PK
+	tipo_documento			varchar(100)
+	numero_documento		varchar(100)
+	nombre					varchar(100)
+	apellido				varchar(100)
+	fecha_nacimiento		date
+	nacionalidad			varchar(100)
+	mail					varchar(100)
+	teléfono				varchar(100)
+	---------------------------------------
+
+	REST
+		Listado de clientes: 		/api/clientes			GET
+		Un cliente por id:			/api/clientes/{id}		GET
+		Agregar	un clientes:		/api/clientes			POST
+		Editar un cliente: 			/api/clientes			PUT
+		Eliminar un cliente: 		/api/clientes/{id}		DELETE
+
+2- Administración de conceptos de uso de puntos (POST,GET,PUT, DELETE)
+
+	Conceptos (concepto para uso de puntos)
+	---------------------------------------
+	concepto_id 			int PK
+	descripcion				varchar(100)
+	puntos_requeridos 		integer
+	---------------------------------------
+
+	REST
+		Listar conceptos: 		/api/conceptos			GET
+		Un concepto por id: 	/api/conceptos/{id} 	GET
+		Agregar un concepto: 	/api/conceptos			POST
+		Editar un concepto:		/api/conceptos/		 	PUT
+		Eliminar un concepto: 	/api/conceptos/{id}		DELETE
+
+3- Administración de reglas de asignación de puntos (POST,GET,PUT, DELETE)
+
+	Reglas
+	---------------------------------------
+	regla_id 						integer		PK
+	limite_inferior					integer 	null
+	limite_superior					integer		null
+	monto_equivalencia_por_punto	integer		not null
+	---------------------------------------
+
+	REST
+		Listar reglas: 			/api/reglas			GET
+		Un regla por id: 		/api/reglas/{id} 	GET
+		Agregar un regla: 		/api/reglas			POST
+		Editar un regla:		/api/reglas		 	PUT
+		Eliminar un regla: 		/api/reglas/{id}	DELETE
+
+
+	OBSERVACION: los limites son datos opcionales.
+
+4- Parametrización de vencimientos de puntos (POST,GET,PUT, DELETE)
+	
+	Vencimientos
+	---------------------------------------
+	vencimiento_id				integer
+	fecha_inicio_validez		date
+	fecha_fin_validez			date
+	dias_restantes				integer
+	---------------------------------------
+
+	REST
+		Listar vencimientos: 		/api/vencimientos			GET
+		Un vencimiento por id: 		/api/vencimientos/{id}	 	GET
+		Agregar un vencimiento: 	/api/vencimientos			POST
+		Editar un vencimiento:		/api/vencimientos			PUT
+		Eliminar un vencimiento: 	/api/vencimientos/{id}		DELETE
+
+	json
+		{
+			fecha_inicio_validez,
+			fecha_fin_validez,
+			dias_restantes
+		}
+
+
+	nota para el team: por lo que vimos parece que para las bolsas que 
+	se crean dentro del rango del vencimiento llevara como su duracion 
+	"dias_restantes"
+
+5- Bolsa de puntos(Estructura)
+
+	Bolsas
+	---------------------------------------
+	bolsa_id							PK
+	cliente_id							FK
+	fecha_de_asignacion_de_puntaje		timestamp with out zone
+	fecha_de_caducidad_de_puntaje		timestamp with out zone
+	puntaje_asignado					integer not null
+	puntaje_utilizado					integer default '0'
+	saldo_de_puntos						integer not null
+	monto_de_la_operación				integer	not null
+	estado								boolean
+	---------------------------------------
+
+
+6-  Uso de puntos(Estructura)
+
+	uso_de_puntos
+	{
+		Cabecera:{
+			cabecera_id,
+			cliente_id,
+			puntaje_utilizado,
+			fecha,
+			concepto_id
+		},
+		detalles:[
+			{	
+				detalle_id,
+				cabecera_id,
+				puntaje_utizado,
+				bolsa_id
+			},			
+		]
+	}
+
+7- Consultas (GET)
+
+Este módulo contempla la consulta para el desarrollo de reportes.
+Las consultas a proveer son:
+
+	- uso de puntos por: concepto de uso, fecha de uso, cliente
+
+	/api/consultas/puntos
+
+		params: concepto_id, cliente_id, fecha_uso
+
+--------------------------------------------------------------------------------------------------
+	
+	- bolsa de puntos por: cliente, rango de puntos
+
+	/api/consultas/bolsa 
+
+		params: cliente_id, limite_inferior, limite_superior
+
+--------------------------------------------------------------------------------------------------
+
+	- clientes con puntos a vencer en x días
+
+	/api/consultas/vencimientos
+
+		params: dias
+
+--------------------------------------------------------------------------------------------------
+	- consulta de clientes por: nombre (aproximación), apellido (aproximación), cumpleaños
+
+	/api/consultas/clientes
+
+		params: nombre, apellido, cumpleanhos
+
+--------------------------------------------------------------------------------------------------
+
+8- Servicios
+
+	- carga de puntos (POST): se recibe el identificador de cliente y el monto de la
+	operación, y se asigna los puntos (genera datos con la estructura del punto 5)
+
+	POST	/api/servicios/cargar_puntos
+	Body: 
+		{
+			cliente_id
+			monto_carga
+		}
+		
+
+	- utilizar puntos (POST): se recibe el identificador del cliente y el identificador del
+	concepto de uso y se descuenta dicho puntaje al cliente registrando el uso de puntos
+	(genera datos con la estructura del punto 6 y actualiza la del punto 5)
+	o además debe enviar un correo electrónico al cliente como comprobante
+
+	POST 	/api/servicios/utilizar_puntos
+	Body: 
+		{
+			cliente_id
+			concepto_id
+		}
+
+	obs.: enviar por correo el objeto generado de uso_de_puntos en formato json.
+
+	- consultar cuantos puntos equivale a un monto X (GET): es un servicio
+	informativo que devuelve la cantidad de puntos equivalente al monto proporcionado
+	como parámetro utilizando la configuración del punto 3
+
+	GET 	/api/servicios/consulta_puntos
+	params: monto
+
+9- Proceso planificado cada x horas
+	Proceso que pueda planificarse que corra cada X horas y actualice el estado de
+	las bolsas con puntos vencidos.
