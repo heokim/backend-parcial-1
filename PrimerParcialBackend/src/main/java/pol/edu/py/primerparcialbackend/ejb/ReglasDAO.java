@@ -23,8 +23,4 @@ public class ReglasDAO extends AbstractDAO<Reglas> {
         return em;
     }
     
-    public List<Reglas> todos(){
-        return this.em.createQuery("SELECT r FROM Reglas r").getResultList();
-    }
-
 }

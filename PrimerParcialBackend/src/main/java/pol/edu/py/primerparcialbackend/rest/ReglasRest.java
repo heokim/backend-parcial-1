@@ -25,12 +25,6 @@ public class ReglasRest {
     ReglasDAO reglasDAO;
     
     @GET
-    @Path("saludo")
-    public Response hola() {
-        return Response.ok("hola").build();
-    }
-    
-    @GET
     @Path("/")
     @Produces({MediaType.APPLICATION_JSON})
     public Response lista() {
@@ -42,5 +36,19 @@ public class ReglasRest {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getId(@PathParam("id") int id) {
         return Response.ok(reglasDAO.find(id)).build();
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createRegla(Reglas nuevaRegla) {
+        return Response.ok(reglasDAO.create(nuevaRegla)).build();
+    }
+    
+    @DELETE
+    @Path("/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response removeId(@PathParam("id") int id) {
+        reglasDAO.removeById(id);
+        return Response.noContent().build();
     }
 }
