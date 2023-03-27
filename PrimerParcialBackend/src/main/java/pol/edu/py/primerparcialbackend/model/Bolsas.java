@@ -70,7 +70,7 @@ public class Bolsas implements Serializable {
     private int montoDeLaOperacion;
     @Column(name = "estado")
     private Boolean estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsaId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsaId", fetch = FetchType.EAGER)
     private List<UsoDePuntosDetalles> usoDePuntosDetallesList;
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

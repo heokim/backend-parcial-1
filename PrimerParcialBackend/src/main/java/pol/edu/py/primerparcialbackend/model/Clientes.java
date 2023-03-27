@@ -71,10 +71,10 @@ public class Clientes implements Serializable {
     @Size(max = 100)
     @Column(name = "telefono")
     private String telefono;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.LAZY)
-    private List<UsoDePuntos> usoDePuntosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.LAZY)
-    private List<Bolsas> bolsasList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.LAZY)
+//    private List<UsoDePuntos> usoDePuntosList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId", fetch = FetchType.LAZY)
+//    private List<Bolsas> bolsasList;
 
     public Clientes() {
     }
@@ -155,23 +155,23 @@ public class Clientes implements Serializable {
         this.telefono = telefono;
     }
 
-    @XmlTransient
-    public List<UsoDePuntos> getUsoDePuntosList() {
-        return usoDePuntosList;
-    }
-
-    public void setUsoDePuntosList(List<UsoDePuntos> usoDePuntosList) {
-        this.usoDePuntosList = usoDePuntosList;
-    }
-
-    @XmlTransient
-    public List<Bolsas> getBolsasList() {
-        return bolsasList;
-    }
-
-    public void setBolsasList(List<Bolsas> bolsasList) {
-        this.bolsasList = bolsasList;
-    }
+//    @XmlTransient
+//    public List<UsoDePuntos> getUsoDePuntosList() {
+//        return usoDePuntosList;
+//    }
+//
+//    public void setUsoDePuntosList(List<UsoDePuntos> usoDePuntosList) {
+//        this.usoDePuntosList = usoDePuntosList;
+//    }
+//
+//    @XmlTransient
+//    public List<Bolsas> getBolsasList() {
+//        return bolsasList;
+//    }
+//
+//    public void setBolsasList(List<Bolsas> bolsasList) {
+//        this.bolsasList = bolsasList;
+//    }
 
     @Override
     public int hashCode() {
@@ -196,6 +196,24 @@ public class Clientes implements Serializable {
     @Override
     public String toString() {
         return "pol.edu.py.primerparcialbackend.model.Clientes[ clienteId=" + clienteId + " ]";
+    }
+
+    public String toJson() {
+        StringBuilder str = new StringBuilder();
+        str.append("Clientes:{\n");
+        str.append("clienteId: ").append(clienteId != null ? clienteId : null).append(",\n");
+        str.append("tipoDocumento: ").append(tipoDocumento != null ? tipoDocumento : null).append(",\n");
+        str.append("numeroDocumento: ").append(numeroDocumento != null ? numeroDocumento : null).append(",\n");
+        str.append("nombre: ").append(nombre != null ? nombre : null).append(",\n");
+        str.append("apellido: ").append(apellido != null ? apellido : null).append(",\n");
+        str.append("fechaNacimiento: ").append(fechaNacimiento != null ? fechaNacimiento : null).append(",\n");
+        str.append("nacionalidad: ").append(nacionalidad != null ? nacionalidad : null).append(",\n");
+        str.append("mail: ").append(mail != null ? mail : null).append(",\n");
+        str.append("telefono: ").append(telefono != null ? telefono : null).append(",\n");
+//        str.append("usoDePuntosList: ").append(usoDePuntosList != null ? usoDePuntosList : null).append(",\n");
+//        str.append("bolsasList: ").append(bolsasList != null ? bolsasList : null);
+        str.append("}");
+        return str.toString();
     }
 
 }
