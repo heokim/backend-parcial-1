@@ -398,7 +398,133 @@
 		},
 		{
 			"name": "4- Vencimientos",
-			"item": []
+			"item": [
+				{
+					"name": "Vencimiento por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/vencimientos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"vencimientos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Vencimientos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/vencimientos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"vencimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Vencimiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fechaInicioValidez\":\"2023-03-01\",\r\n    \"fechaFinValidez\":\"2023-03-31\",\r\n    \"diasRestantes\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/vencimientos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"vencimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Vencimiento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vencimientoId\": 1,\r\n    \"fechaInicioValidez\": \"2023-03-01\",\r\n    \"fechaFinValidez\": \"2023-03-31\",\r\n    \"diasRestantes\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/vencimientos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"vencimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/vencimientos/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"vencimientos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "7- Consultas",
