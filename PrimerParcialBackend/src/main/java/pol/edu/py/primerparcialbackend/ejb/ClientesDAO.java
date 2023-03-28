@@ -32,7 +32,6 @@ public class ClientesDAO extends AbstractDAO<Clientes> {
         calendar.setTime(fechaActual);
         calendar.add(Calendar.DAY_OF_YEAR, dias);
         
-        
         return em.createQuery(
                 "SELECT c FROM Clientes c, Bolsas b "
                         + "WHERE b.clienteId = c.clienteId "

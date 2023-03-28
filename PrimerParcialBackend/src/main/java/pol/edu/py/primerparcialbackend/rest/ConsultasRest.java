@@ -34,7 +34,7 @@ public class ConsultasRest {
     @GET
     @Path("vencimientos")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response findById(@QueryParam("dias") int dias) {
+    public Response findClientesPorVencer(@QueryParam("dias") int dias) {
         return Response.ok(clientesDAO.findByDiasRestantesVencimiento(dias)).build();
     }
 

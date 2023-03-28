@@ -1,6 +1,7 @@
 package pol.edu.py.primerparcialbackend.ejb;
 
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -69,4 +70,39 @@ public abstract class AbstractDAO<T> {
         List<T> resultList = query.getResultList();
         return resultList;
     }
+    
+    public List<T> findByParametro(String parameter, Object value) {
+        try {
+            return getEntityManager()
+                    .createQuery("SELECT a FROM " + this.entityClass.getSimpleName() + " a WHERE a." + parameter + " = :value")
+                    .setParameter("value", value)
+                    .getResultList();
+        } catch (Exception e) {
+            System.out.println("Exception in  findByParametro() -> " + e.getLocalizedMessage());
+            return null;
+        }
+
+    }
+    
+    public List<T> findByParametrosMap(Map<String, Object> map) {
+        try {
+            String parametros = "";
+            int count = 0;
+            for (String key : map.keySet()) {
+                parametros += (parametros.equals("") ? "" : " AND ") + "a." + key + " = :p" + (++count);
+
+            }
+            Query q = getEntityManager().createQuery("SELECT a FROM " + this.entityClass.getSimpleName() + " a WHERE " + parametros);
+            count = 0;
+            for (String key : map.keySet()) {
+                q.setParameter("p" + (++count), map.get(key));
+            }
+            return q.getResultList();
+        } catch (Exception e) {
+            System.out.println("Exception in  findByParametrosMap() -> " + e.getLocalizedMessage());
+            return null;
+        }
+
+    }
+    
 }
