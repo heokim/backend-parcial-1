@@ -47,11 +47,11 @@ public class Bolsas implements Serializable {
     private Integer clienteId;
     @Column(name = "fecha_de_asignacion_de_puntaje")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "es-PY", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",timezone = "America/Asuncion")
     private Date fechaDeAsignacionDePuntaje;
     @Column(name = "fecha_de_caducidad_de_puntaje")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "es-PY", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",timezone = "America/Asuncion")
     private Date fechaDeCaducidadDePuntaje;
     @Basic(optional = false)
     @NotNull

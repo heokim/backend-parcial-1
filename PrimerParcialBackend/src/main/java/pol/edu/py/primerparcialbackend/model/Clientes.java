@@ -57,7 +57,7 @@ public class Clientes implements Serializable {
     private String apellido;
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "es-PY", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",timezone = "America/Asuncion")
     private Date fechaNacimiento;
     @Size(max = 100)
     @Column(name = "nacionalidad")

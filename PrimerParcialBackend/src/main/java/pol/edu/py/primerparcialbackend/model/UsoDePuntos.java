@@ -43,7 +43,7 @@ public class UsoDePuntos implements Serializable {
     private Integer cabeceraId;
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "es-PY", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",timezone = "America/Asuncion")
     private Date fecha;
     @Column(name = "puntaje_utilizado")
     private Integer puntajeUtilizado;
