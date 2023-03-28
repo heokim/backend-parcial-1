@@ -27,8 +27,6 @@ public abstract class AbstractDAO<T> {
 
     public T edit(T entity) {
         getEntityManager().merge(entity);
-        getEntityManager().flush();
-        getEntityManager().refresh(entity);
         return entity;
     }
 
