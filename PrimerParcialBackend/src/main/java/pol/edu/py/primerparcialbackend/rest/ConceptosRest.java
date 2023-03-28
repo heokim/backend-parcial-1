@@ -19,6 +19,8 @@ import pol.edu.py.primerparcialbackend.model.Conceptos;
 @RequestScoped
 @Path("conceptos")
 public class ConceptosRest {
+    
+    private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(ConceptosRest.class.getName());
 
     @Inject
     ConceptosDAO conceptosDAO;
@@ -40,7 +42,6 @@ public class ConceptosRest {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response crear(Conceptos concepto) {
-        System.out.println("/api/conceptos  POST : Crear");
         conceptosDAO.create(concepto);
         return Response.ok(concepto).build();
     }
@@ -49,13 +50,13 @@ public class ConceptosRest {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response modificar(Conceptos concepto) {
-        System.out.println("/api/conceptos  POST");
-        System.out.println("Conceptos Body:");
-        System.out.println(concepto.toJson());
+        LOG.info("/api/conceptos  PUT");
+        LOG.info("Conceptos Body:");
+        LOG.info(concepto.toJson());
 
         Conceptos db = conceptosDAO.find(concepto.getConceptoId());
-        System.out.println("Fetch in DB");
-        System.out.println("db: " + db.toJson());
+        LOG.info("Fetch in DB");
+        LOG.info("db: " + db.toJson());
 
         if (db != null && Objects.equals(db.getConceptoId(), concepto.getConceptoId())) {
             if (concepto.getDescripcion() != null) {
@@ -64,7 +65,7 @@ public class ConceptosRest {
             if (concepto.getPuntosRequeridos() != null) {
                 db.setPuntosRequeridos(concepto.getPuntosRequeridos());
             }
-            System.out.println("db after updated fields: " + db.toJson());
+            LOG.info("db after updated fields: " + db.toJson());
             conceptosDAO.edit(db);
             return Response.ok(db).build();
         } else {

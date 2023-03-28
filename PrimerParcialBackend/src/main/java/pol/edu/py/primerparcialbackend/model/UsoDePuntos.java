@@ -59,6 +59,13 @@ public class UsoDePuntos implements Serializable {
     public UsoDePuntos() {
     }
 
+    public UsoDePuntos(Date fecha, Integer puntajeUtilizado, Clientes clienteId, Conceptos conceptoId) {
+        this.fecha = fecha;
+        this.puntajeUtilizado = puntajeUtilizado;
+        this.clienteId = clienteId;
+        this.conceptoId = conceptoId;
+    }
+
     public UsoDePuntos(Integer cabeceraId) {
         this.cabeceraId = cabeceraId;
     }
