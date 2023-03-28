@@ -48,8 +48,8 @@ public class Conceptos implements Serializable {
     @NotNull
     @Column(name = "puntos_requeridos")
     private Integer puntosRequeridos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conceptoId", fetch = FetchType.LAZY)
-    private List<UsoDePuntos> usoDePuntosList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conceptoId", fetch = FetchType.LAZY)
+//    private List<UsoDePuntos> usoDePuntosList;
 
     public Conceptos() {
     }
@@ -88,14 +88,14 @@ public class Conceptos implements Serializable {
         this.puntosRequeridos = puntosRequeridos;
     }
 
-    @XmlTransient
-    public List<UsoDePuntos> getUsoDePuntosList() {
-        return usoDePuntosList;
-    }
-
-    public void setUsoDePuntosList(List<UsoDePuntos> usoDePuntosList) {
-        this.usoDePuntosList = usoDePuntosList;
-    }
+//    @XmlTransient
+//    public List<UsoDePuntos> getUsoDePuntosList() {
+//        return usoDePuntosList;
+//    }
+//
+//    public void setUsoDePuntosList(List<UsoDePuntos> usoDePuntosList) {
+//        this.usoDePuntosList = usoDePuntosList;
+//    }
 
     @Override
     public int hashCode() {

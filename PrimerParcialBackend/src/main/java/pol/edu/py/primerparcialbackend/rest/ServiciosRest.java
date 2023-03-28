@@ -1,5 +1,7 @@
 package pol.edu.py.primerparcialbackend.rest;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +10,10 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -28,7 +32,7 @@ import pol.edu.py.primerparcialbackend.model.UsoDePuntosDetalles;
 @RequestScoped
 @Path("servicios")
 public class ServiciosRest {
-    
+
     private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(ServiciosRest.class.getName());
 
     @Inject
@@ -46,8 +50,10 @@ public class ServiciosRest {
     @Path("utilizar_puntos")
     @Produces({MediaType.APPLICATION_JSON})
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public Response utilizarPuntos(@QueryParam("cliente_id") int clienteId,
-            @QueryParam("concepto_id") int conceptoId) {
+    public Response utilizarPuntos(
+            @QueryParam("cliente_id") int clienteId,
+            @QueryParam("concepto_id") int conceptoId
+    ) {
         LOG.info("/api/servicios/utilizar_puntos  POST");
 
         //variables
@@ -90,11 +96,14 @@ public class ServiciosRest {
                 return Response.ok("El cliente no tiene los puntos necesarios para " + concepto.getDescripcion()).build();
             }
 
+            // ordenando lista por fecha de vencimiento
+            Collections.sort(listaBolsas, (Bolsas b1, Bolsas b2) -> b1.getFechaDeCaducidadDePuntaje().compareTo(b2.getFechaDeCaducidadDePuntaje()));
+
         }
 
         LOG.info("Generando UsoDePuntos");
         // Generar cabecera
-        UsoDePuntos cabecera = new UsoDePuntos(new Date(), puntosNecesarios, cliente, concepto);
+        UsoDePuntos cabecera = new UsoDePuntos(new Date(), puntosNecesarios, cliente.getClienteId(), concepto.getConceptoId());
         usoDePuntosDAO.create(cabecera);
 
         LOG.info("Generando UsoDePuntosDetalles");
@@ -110,23 +119,27 @@ public class ServiciosRest {
                     puntosNecesarios = 0;
                 } else {
                     puntosUtilizados = b.getSaldoDePuntos();
-                    puntosNecesarios  = puntosNecesarios - b.getSaldoDePuntos();
+                    puntosNecesarios = puntosNecesarios - b.getSaldoDePuntos();
                     b.setPuntajeUtilizado(b.getPuntajeUtilizado() + b.getSaldoDePuntos());
                     b.setSaldoDePuntos(0);
                     b.setEstado(false);
                 }
-                LOG.info("puntos utilizados de bolsaId "+b.getBolsaId()+" : "+puntosUtilizados);
+                LOG.info("puntos utilizados de bolsaId " + b.getBolsaId() + " : " + puntosUtilizados);
                 // generar detalles
-                UsoDePuntosDetalles detalle = new UsoDePuntosDetalles(puntosUtilizados,b,cabecera);
+                UsoDePuntosDetalles detalle = new UsoDePuntosDetalles(puntosUtilizados, b.getBolsaId(), cabecera.getCabeceraId());
                 usoDePuntosDetallesDAO.create(detalle);
                 // actualizar bolsas
                 bolsasDAO.edit(b);
-            }else{
+            } else {
                 break;
             }
         }
-        
-        return Response.ok("Puntos usados correctamente").build();
+
+        LOG.info("Puntos usados correctamente");
+
+        // Actualizar de la base de datos
+        cabecera = usoDePuntosDAO.find(cabecera.getCabeceraId());
+        return Response.ok(cabecera).build();
     }
 
 }

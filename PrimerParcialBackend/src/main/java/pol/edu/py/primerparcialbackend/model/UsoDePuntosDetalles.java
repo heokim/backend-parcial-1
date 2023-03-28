@@ -4,12 +4,9 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -35,22 +32,23 @@ public class UsoDePuntosDetalles implements Serializable {
     @Basic(optional = false)
     @Column(name = "detalle_id")
     private Integer detalleId;
+//    @JoinColumn(name = "cabecera_id", referencedColumnName = "cabecera_id")
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @Column(name = "cabecera_id")
-    private UsoDePuntos cabeceraId;
+    private Integer cabeceraId;
+//    @JoinColumn(name = "bolsa_id", referencedColumnName = "bolsa_id")
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @Column(name = "bolsa_id")
+    private Integer bolsaId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "puntaje_utilizado")
     private int puntajeUtilizado;
-    @JoinColumn(name = "bolsa_id", referencedColumnName = "bolsa_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Bolsas bolsaId;
-//    @JoinColumn(name = "cabecera_id", referencedColumnName = "cabecera_id")
-//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
 
     public UsoDePuntosDetalles() {
     }
 
-    public UsoDePuntosDetalles(int puntajeUtilizado, Bolsas bolsaId, UsoDePuntos cabeceraId) {
+    public UsoDePuntosDetalles(int puntajeUtilizado, Integer bolsaId, Integer cabeceraId) {
         this.puntajeUtilizado = puntajeUtilizado;
         this.bolsaId = bolsaId;
         this.cabeceraId = cabeceraId;
@@ -81,19 +79,19 @@ public class UsoDePuntosDetalles implements Serializable {
         this.puntajeUtilizado = puntajeUtilizado;
     }
 
-    public Bolsas getBolsaId() {
+    public Integer getBolsaId() {
         return bolsaId;
     }
 
-    public void setBolsaId(Bolsas bolsaId) {
+    public void setBolsaId(Integer bolsaId) {
         this.bolsaId = bolsaId;
     }
 
-    public UsoDePuntos getCabeceraId() {
+    public Integer getCabeceraId() {
         return cabeceraId;
     }
 
-    public void setCabeceraId(UsoDePuntos cabeceraId) {
+    public void setCabeceraId(Integer cabeceraId) {
         this.cabeceraId = cabeceraId;
     }
 
