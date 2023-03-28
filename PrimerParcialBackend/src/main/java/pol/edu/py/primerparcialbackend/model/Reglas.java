@@ -41,7 +41,7 @@ public class Reglas implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "monto_equivalencia_por_punto")
-    private int montoEquivalenciaPorPunto;
+    private Integer montoEquivalenciaPorPunto;
 
     public Reglas() {
     }
@@ -79,11 +79,11 @@ public class Reglas implements Serializable {
         this.limiteSuperior = limiteSuperior;
     }
 
-    public int getMontoEquivalenciaPorPunto() {
+    public Integer getMontoEquivalenciaPorPunto() {
         return montoEquivalenciaPorPunto;
     }
 
-    public void setMontoEquivalenciaPorPunto(int montoEquivalenciaPorPunto) {
+    public void setMontoEquivalenciaPorPunto(Integer montoEquivalenciaPorPunto) {
         this.montoEquivalenciaPorPunto = montoEquivalenciaPorPunto;
     }
 
@@ -110,6 +110,17 @@ public class Reglas implements Serializable {
     @Override
     public String toString() {
         return "pol.edu.py.primerparcialbackend.model.Reglas[ reglaId=" + reglaId + " ]";
+    }
+    
+    public String toJson() {
+        StringBuilder str = new StringBuilder();
+        str.append("Reglas:{\n");
+        str.append("reglaId: ").append(reglaId != null ? reglaId : null).append(",\n");
+        str.append("limiteInferior: ").append(limiteInferior != null ? limiteInferior : null).append(",\n");
+        str.append("limiteSuperior: ").append(limiteSuperior != null ? limiteSuperior : null).append(",\n");
+        str.append("montoEquivalenciaPorPunto: ").append(montoEquivalenciaPorPunto != null ? montoEquivalenciaPorPunto : null).append("\n");
+        str.append("}");
+        return str.toString();
     }
 
 }

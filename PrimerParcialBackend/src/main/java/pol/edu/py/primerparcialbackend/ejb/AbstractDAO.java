@@ -34,6 +34,12 @@ public abstract class AbstractDAO<T> {
     public void remove(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
+    
+    
+    public void removeById(Object id) {
+        T entityToRemove = getEntityManager().find(entityClass, id);
+        getEntityManager().remove(getEntityManager().merge(entityToRemove));
+    }
 
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
