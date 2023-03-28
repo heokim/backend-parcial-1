@@ -1,5 +1,6 @@
 package pol.edu.py.primerparcialbackend.rest;
 
+import java.util.Date;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -47,6 +48,22 @@ public class ConsultasRest {
 
         //SELECT puntaje_utilizado FROM uso_de_puntos WHERE cliente_id = :cliente_id and concepto_id = :concepto_id and fecha = :fecha;
         return Response.status(200).build();
+    }
+
+    @GET
+    @Path("clientes")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getClientePorNombreApellidoYCumple(
+            @QueryParam("nombre") String nombre,
+            @QueryParam("apellido") String apellido,
+            @QueryParam("cumpleanhos") Long f
+    ) {
+        System.out.println("/api/consultas/clientes  GET");
+        System.out.println("cumpleanhos: " + f);
+        Date fecha = new Date(f);
+        System.out.println("fecha: " + fecha);
+
+        return Response.ok(clientesDAO.getClienteByNombreApellidoAndCumple(nombre, apellido, fecha)).build();
     }
 
 }

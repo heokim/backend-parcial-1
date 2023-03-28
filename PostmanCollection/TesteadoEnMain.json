@@ -466,6 +466,42 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Cliente por nombre y apellido y cumple",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/consultas/clientes?nombre=An&apellido=H&cumpleanhos=915062400000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"consultas",
+								"clientes"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "An"
+								},
+								{
+									"key": "apellido",
+									"value": "H"
+								},
+								{
+									"key": "cumpleanhos",
+									"value": "915062400000"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
