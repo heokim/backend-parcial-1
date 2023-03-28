@@ -1,5 +1,6 @@
 package pol.edu.py.primerparcialbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -46,9 +47,11 @@ public class Bolsas implements Serializable {
     private Integer clienteId;
     @Column(name = "fecha_de_asignacion_de_puntaje")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "es-PY", timezone = "UTC")
     private Date fechaDeAsignacionDePuntaje;
     @Column(name = "fecha_de_caducidad_de_puntaje")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "es-PY", timezone = "UTC")
     private Date fechaDeCaducidadDePuntaje;
     @Basic(optional = false)
     @NotNull
@@ -155,7 +158,6 @@ public class Bolsas implements Serializable {
 //    public void setUsoDePuntosDetallesList(List<UsoDePuntosDetalles> usoDePuntosDetallesList) {
 //        this.usoDePuntosDetallesList = usoDePuntosDetallesList;
 //    }
-
     public Integer getClienteId() {
         return clienteId;
     }

@@ -1,5 +1,6 @@
 package pol.edu.py.primerparcialbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -56,6 +57,7 @@ public class Clientes implements Serializable {
     private String apellido;
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "es-PY", timezone = "UTC")
     private Date fechaNacimiento;
     @Size(max = 100)
     @Column(name = "nacionalidad")

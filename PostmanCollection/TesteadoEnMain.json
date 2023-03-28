@@ -409,7 +409,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/PrimerParcialBackend/api/consultas/bolsa?cliente_id=1&limite_inferior=10&limite_superior=50",
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/consultas/bolsa?cliente_id=1&limite_inferior=10&limite_superior=5000000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -432,7 +432,7 @@
 								},
 								{
 									"key": "limite_superior",
-									"value": "50"
+									"value": "5000000"
 								}
 							]
 						}
@@ -472,6 +472,37 @@
 		{
 			"name": "8- Servicios",
 			"item": [
+				{
+					"name": "Cargar Puntos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cliente_id\":1,\r\n    \"monto_carga\":4000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/servicios/cargar_puntos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"servicios",
+								"cargar_puntos"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Utilizar Puntos",
 					"request": {

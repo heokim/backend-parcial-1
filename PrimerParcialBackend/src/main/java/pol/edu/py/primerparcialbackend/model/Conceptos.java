@@ -96,7 +96,6 @@ public class Conceptos implements Serializable {
 //    public void setUsoDePuntosList(List<UsoDePuntos> usoDePuntosList) {
 //        this.usoDePuntosList = usoDePuntosList;
 //    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -121,7 +120,7 @@ public class Conceptos implements Serializable {
     public String toString() {
         return "pol.edu.py.primerparcialbackend.model.Conceptos[ conceptoId=" + conceptoId + " ]";
     }
-    
+
     public String toJson() {
         StringBuilder str = new StringBuilder();
         str.append("Clientes:{\n");

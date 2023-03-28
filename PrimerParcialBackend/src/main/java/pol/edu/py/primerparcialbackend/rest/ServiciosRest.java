@@ -1,7 +1,6 @@
 package pol.edu.py.primerparcialbackend.rest;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,6 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -30,13 +28,14 @@ import pol.edu.py.primerparcialbackend.model.Conceptos;
 import pol.edu.py.primerparcialbackend.model.Reglas;
 import pol.edu.py.primerparcialbackend.model.UsoDePuntos;
 import pol.edu.py.primerparcialbackend.model.UsoDePuntosDetalles;
+import pol.edu.py.primerparcialbackend.utils.CargarPuntosBody;
 
 @RequestScoped
 @Path("servicios")
 public class ServiciosRest {
-    
+
     private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(ServiciosRest.class.getName());
-    
+
     @Inject
     ClientesDAO clientesDAO;
     @Inject
@@ -49,7 +48,21 @@ public class ServiciosRest {
     UsoDePuntosDetallesDAO usoDePuntosDetallesDAO;
     @Inject
     ReglasDAO reglasDAO;
-    
+
+    @POST
+    @Path("cargar_puntos")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response cargarPuntos(CargarPuntosBody body) {
+        int clienteId = body.getCliente_id();
+        int monto = body.getMonto_carga();
+
+        if (clientesDAO.find(body.getCliente_id()) != null) {
+            return Response.ok(bolsasDAO.create(clienteId, monto, (int) consultasPuntosPorMonto(monto).getEntity())).build();
+        } else {
+            return Response.status(400, "Cliente con id: " + clienteId + " no exite").build();
+        }
+    }
+
     @POST
     @Path("utilizar_puntos")
     @Produces({MediaType.APPLICATION_JSON})
@@ -77,7 +90,7 @@ public class ServiciosRest {
             LOG.info("concepto_id invalido");
             return Response.ok("No existe concepto con id : " + conceptoId).build();
         }
-        
+
         puntosNecesarios = concepto.getPuntosRequeridos();
 
         // verificar si el cliente tiene los puntos necesarios
@@ -102,14 +115,14 @@ public class ServiciosRest {
 
             // ordenando lista por fecha de vencimiento
             Collections.sort(listaBolsas, (Bolsas b1, Bolsas b2) -> b1.getFechaDeCaducidadDePuntaje().compareTo(b2.getFechaDeCaducidadDePuntaje()));
-            
+
         }
-        
+
         LOG.info("Generando UsoDePuntos");
         // Generar cabecera
         UsoDePuntos cabecera = new UsoDePuntos(new Date(), puntosNecesarios, cliente.getClienteId(), concepto.getConceptoId());
         usoDePuntosDAO.create(cabecera);
-        
+
         LOG.info("Generando UsoDePuntosDetalles");
         //generar detalles
         //se va extraer los puntos de cada bolsa hasta completar los puntos necesarios
@@ -138,21 +151,21 @@ public class ServiciosRest {
                 break;
             }
         }
-        
+
         LOG.info("Puntos usados correctamente");
 
         // Actualizar de la base de datos
         cabecera = usoDePuntosDAO.find(cabecera.getCabeceraId());
         return Response.ok(cabecera).build();
     }
-    
+
     @GET
     @Path("consulta_puntos")
     public Response consultasPuntosPorMonto(@QueryParam("monto") int monto) {
 
         // traer todas las reglas
         List<Reglas> reglas = reglasDAO.findAll();
-        
+
         if (reglas == null) {
             // si no tiene reglas parar
             return Response.ok("No exiten Reglas para realizar esta operacion").build();
@@ -172,5 +185,5 @@ public class ServiciosRest {
             return Response.ok("No existe regla que contenga al Monto especificado").build();
         }
     }
-    
+
 }
