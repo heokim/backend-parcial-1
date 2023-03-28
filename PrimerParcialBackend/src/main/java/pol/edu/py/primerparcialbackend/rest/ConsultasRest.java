@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pol.edu.py.primerparcialbackend.ejb.BolsasDAO;
 import pol.edu.py.primerparcialbackend.ejb.ClientesDAO;
+import pol.edu.py.primerparcialbackend.utils.DateUtils;
 
 @RequestScoped
 @Path("consultas")
@@ -56,12 +57,11 @@ public class ConsultasRest {
     public Response getClientePorNombreApellidoYCumple(
             @QueryParam("nombre") String nombre,
             @QueryParam("apellido") String apellido,
-            @QueryParam("cumpleanhos") Long f
+            @QueryParam("cumpleanhos") String fechaString
     ) {
         System.out.println("/api/consultas/clientes  GET");
-        System.out.println("cumpleanhos: " + f);
-        Date fecha = new Date(f);
-        System.out.println("fecha: " + fecha);
+        System.out.println("cumpleanhos: " + fechaString);
+        Date fecha = DateUtils.stringToDate(fechaString, "yyyy-MM-dd");
 
         return Response.ok(clientesDAO.getClienteByNombreApellidoAndCumple(nombre, apellido, fecha)).build();
     }

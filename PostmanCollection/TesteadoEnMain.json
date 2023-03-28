@@ -473,7 +473,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/PrimerParcialBackend/api/consultas/clientes?nombre=An&apellido=H&cumpleanhos=915062400000",
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/consultas/clientes?nombre=An&apellido=H&cumpleanhos=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -496,7 +496,7 @@
 								},
 								{
 									"key": "cumpleanhos",
-									"value": "915062400000"
+									"value": ""
 								}
 							]
 						}
