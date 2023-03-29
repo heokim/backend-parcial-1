@@ -184,4 +184,4 @@ Las consultas a proveer son:
 		params: monto
 
 ### 9- Proceso planificado cada x horas
-	Proceso que pueda planificarse que corra cada X horas y actualice el estado de las bolsas con puntos vencidos.
+Proceso que pueda planificarse que corra cada X horas y actualice el estado de las bolsas con puntos vencidos.
