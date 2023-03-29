@@ -1,5 +1,8 @@
 package pol.edu.py.primerparcialbackend.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,6 +32,7 @@ import pol.edu.py.primerparcialbackend.model.Reglas;
 import pol.edu.py.primerparcialbackend.model.UsoDePuntos;
 import pol.edu.py.primerparcialbackend.model.UsoDePuntosDetalles;
 import pol.edu.py.primerparcialbackend.utils.CargarPuntosBody;
+import pol.edu.py.primerparcialbackend.utils.EMailService;
 
 @RequestScoped
 @Path("servicios")
@@ -156,6 +160,30 @@ public class ServiciosRest {
 
         // Actualizar de la base de datos
         cabecera = usoDePuntosDAO.find(cabecera.getCabeceraId());
+
+        // Creando Cuerpo del mail
+        StringBuilder cuerpo = new StringBuilder();
+        cuerpo.append("<h3>Comprobante</h3><hr><br>")
+                .append("Uso de Bolsas:<br>")
+                .append("------------------------------------------------------------<br>")
+                .append("Concepto: ").append(concepto.getDescripcion()).append("<br>")
+                .append("Cliente: ").append(cliente.getNombre()).append(" ").append(cliente.getApellido()).append("<br>")
+                .append("Fecha: ").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(cabecera.getFecha())).append("<br>")
+                .append("Total de Puntos Utilizados: ").append(cabecera.getPuntajeUtilizado()).append("<br>")
+                .append("------------------------------------------------------------<br>")
+                .append("<br> Lista de detalles de bolsa:<br>")
+                .append("------------------------------------------------------------<br>");
+
+        for (UsoDePuntosDetalles detalle : cabecera.getUsoDePuntosDetallesList()) {
+            cuerpo.append("Bolsa ID: ").append(String.valueOf(detalle.getBolsaId())).append("<br>")
+                    .append("Puntos Utilizados: ").append(detalle.getPuntajeUtilizado()).append("<br>")
+                    .append("------------------------------------------------------------<br>");
+        }
+        cuerpo.append("<br>Gracias por si preferencia!!!");
+
+        // Enviar Mail con el Conprobante
+        EMailService.enviarMail(cliente.getMail(), "Conprobante de Uso de Puntos", cuerpo.toString());
+
         return Response.ok(cabecera).build();
     }
 
