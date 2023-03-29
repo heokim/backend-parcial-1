@@ -4,6 +4,8 @@ import java.util.List;
 import javax.ws.rs.DefaultValue;
 import java.util.Objects;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -50,14 +52,18 @@ public class ConsultasRest {
     }
 
     @GET
-    @Path("/puntos")
+    @Path("puntos")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getUsoDePuntos(
 	@QueryParam("cliente_id") int cliente_id,
 	@QueryParam("concepto_id") int concepto_id,
         @QueryParam("fecha_uso") String fecha_uso) {
+        Map<String, Object> mapParam = new HashMap<>();
+        mapParam.put("cliente_id", cliente_id);
+        mapParam.put("concepto_id", concepto_id);
+        mapParam.put("fecha", fecha_uso);
         
-	return Response.ok(usoDePuntosDAO.usoDePuntosQuery(cliente_id,concepto_id,fecha_uso)).status(200).build();
+	return Response.ok(usoDePuntosDAO.findByParametrosMap(mapParam)).status(200).build();
 
     }
 
