@@ -23,5 +23,27 @@ public class ReglasDAO extends AbstractDAO<Reglas> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    /**
+     * Verifica si una Regla de cambio a puntos es aceptado por el Monto
+     * especificado
+     *
+     * @param monto Cantidad del monto que se quiere saber si cumple la regla
+     * @param regla La regla de cambio
+     * @return Monto de puntos a lo que equivale el monto segun la regla
+     */
+    public boolean cumpleLaRegla(int monto, Reglas regla) {
+        Integer li = regla.getLimiteInferior();
+        Integer ls = regla.getLimiteSuperior();
+
+        if (li == null && ls == null) {
+            return (monto >= 0);
+        } else if (li == null && ls != null) {
+            return (monto <= ls);
+        } else if (li != null && ls == null) {
+            return (monto >= li);
+        } else {
+            return (monto >= li && monto <= ls);
+        }
+    }
 }

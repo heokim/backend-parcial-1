@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "facd25bc-360d-4d83-8c44-c693cdd1933d",
+		"_postman_id": "d62099a5-b4bf-47f4-be3f-4677642ebdc1",
 		"name": "PrimerParcialBackend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -8,6 +8,28 @@
 		{
 			"name": "1- Clientes",
 			"item": [
+				{
+					"name": "Cliente por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Listar Clientes",
 					"request": {
@@ -58,6 +80,58 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Modificar cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clienteId\":2,\r\n    \"telefono\":\"0971850995\",\r\n    \"nombre\":\"Moises\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -65,12 +139,12 @@
 			"name": "2- Conceptos",
 			"item": [
 				{
-					"name": "Listar Reglas",
+					"name": "Concepto por ID",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/PrimerParcialBackend/api/reglas/",
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -79,20 +153,20 @@
 							"path": [
 								"PrimerParcialBackend",
 								"api",
-								"reglas",
-								""
+								"conceptos",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Listar Regla by Id",
+					"name": "Listar Conceptos",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/PrimerParcialBackend/api/reglas/10",
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -101,21 +175,20 @@
 							"path": [
 								"PrimerParcialBackend",
 								"api",
-								"reglas",
-								"10"
+								"conceptos"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Insert Regla",
+					"name": "Crear",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"limiteInferior\": 3,\r\n    \"limiteSuperior\": 9,\r\n    \"montoEquivalenciaPorPunto\": 6\r\n}",
+							"raw": "{\r\n    \"descripcion\":\"Vale de compra por 100mil en Biggie\",\r\n    \"puntosRequeridos\":14\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -123,7 +196,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/PrimerParcialBackend/api/reglas",
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -132,20 +205,20 @@
 							"path": [
 								"PrimerParcialBackend",
 								"api",
-								"reglas"
+								"conceptos"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Edit Regla",
+					"name": "Modificar Concepto",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"reglaId\": 5,\r\n    \"limiteInferior\": 3,\r\n    \"limiteSuperior\": 19,\r\n    \"montoEquivalenciaPorPunto\": 6\r\n}",
+							"raw": "{\r\n    \"conceptoId\":1,\r\n    \"descripcion\":\"Descueto 15%\",\r\n    \"puntosRequeridos\":5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -153,7 +226,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/PrimerParcialBackend/api/reglas",
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -162,19 +235,19 @@
 							"path": [
 								"PrimerParcialBackend",
 								"api",
-								"reglas"
+								"conceptos"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete Reglas by Id",
+					"name": "Eliminar por ID",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/PrimerParcialBackend/api/reglas/2",
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -183,8 +256,8 @@
 							"path": [
 								"PrimerParcialBackend",
 								"api",
-								"reglas",
-								"2"
+								"conceptos",
+								"1"
 							]
 						}
 					},
@@ -204,12 +277,12 @@
 			"name": "7- Consultas",
 			"item": [
 				{
-					"name": "Uso de puntos",
+					"name": "Bolsa de Puntos",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/PrimerParcialBackend/api/consultas/puntos?concepto_id=&cliente_id=&fecha_uso='2021-06-24 11:00:00'",
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/consultas/bolsa?cliente_id=1&limite_inferior=10&limite_superior=50",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -219,20 +292,48 @@
 								"PrimerParcialBackend",
 								"api",
 								"consultas",
-								"puntos"
+								"bolsa"
 							],
 							"query": [
 								{
-									"key": "concepto_id",
-									"value": ""
-								},
-								{
 									"key": "cliente_id",
-									"value": ""
+									"value": "1"
 								},
 								{
-									"key": "fecha_uso",
-									"value": "'2021-06-24 11:00:00'"
+									"key": "limite_inferior",
+									"value": "10"
+								},
+								{
+									"key": "limite_superior",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clientes con Puntos a Vencer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/consultas/vencimientos?dias=7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"consultas",
+								"vencimientos"
+							],
+							"query": [
+								{
+									"key": "dias",
+									"value": "7"
 								}
 							]
 						}

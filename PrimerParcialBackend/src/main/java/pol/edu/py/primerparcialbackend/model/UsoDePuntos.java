@@ -1,5 +1,6 @@
 package pol.edu.py.primerparcialbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -11,8 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -44,19 +43,31 @@ public class UsoDePuntos implements Serializable {
     private Integer cabeceraId;
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "es-PY", timezone = "UTC")
     private Date fecha;
     @Column(name = "puntaje_utilizado")
     private Integer puntajeUtilizado;
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Clientes clienteId;
-    @JoinColumn(name = "concepto_id", referencedColumnName = "concepto_id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Conceptos conceptoId;
+//    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @Column(name = "cliente_id")
+    private Integer clienteId;
+//    @JoinColumn(name = "concepto_id", referencedColumnName = "concepto_id")
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @Column(name = "concepto_id")
+    private Integer conceptoId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cabeceraId", fetch = FetchType.EAGER)
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<UsoDePuntosDetalles> usoDePuntosDetallesList;
 
     public UsoDePuntos() {
+    }
+
+    public UsoDePuntos(Date fecha, Integer puntajeUtilizado, Integer clienteId, Integer conceptoId) {
+        this.fecha = fecha;
+        this.puntajeUtilizado = puntajeUtilizado;
+        this.clienteId = clienteId;
+        this.conceptoId = conceptoId;
+        usoDePuntosDetallesList = null;
     }
 
     public UsoDePuntos(Integer cabeceraId) {
@@ -87,19 +98,19 @@ public class UsoDePuntos implements Serializable {
         this.puntajeUtilizado = puntajeUtilizado;
     }
 
-    public Clientes getClienteId() {
+    public Integer getClienteId() {
         return clienteId;
     }
 
-    public void setClienteId(Clientes clienteId) {
+    public void setClienteId(Integer clienteId) {
         this.clienteId = clienteId;
     }
 
-    public Conceptos getConceptoId() {
+    public Integer getConceptoId() {
         return conceptoId;
     }
 
-    public void setConceptoId(Conceptos conceptoId) {
+    public void setConceptoId(Integer conceptoId) {
         this.conceptoId = conceptoId;
     }
 

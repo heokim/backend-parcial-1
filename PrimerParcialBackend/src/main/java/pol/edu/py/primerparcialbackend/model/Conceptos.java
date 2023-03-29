@@ -47,9 +47,9 @@ public class Conceptos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "puntos_requeridos")
-    private int puntosRequeridos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conceptoId", fetch = FetchType.EAGER)
-    private List<UsoDePuntos> usoDePuntosList;
+    private Integer puntosRequeridos;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conceptoId", fetch = FetchType.LAZY)
+//    private List<UsoDePuntos> usoDePuntosList;
 
     public Conceptos() {
     }
@@ -80,23 +80,22 @@ public class Conceptos implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public int getPuntosRequeridos() {
+    public Integer getPuntosRequeridos() {
         return puntosRequeridos;
     }
 
-    public void setPuntosRequeridos(int puntosRequeridos) {
+    public void setPuntosRequeridos(Integer puntosRequeridos) {
         this.puntosRequeridos = puntosRequeridos;
     }
 
-    @XmlTransient
-    public List<UsoDePuntos> getUsoDePuntosList() {
-        return usoDePuntosList;
-    }
-
-    public void setUsoDePuntosList(List<UsoDePuntos> usoDePuntosList) {
-        this.usoDePuntosList = usoDePuntosList;
-    }
-
+//    @XmlTransient
+//    public List<UsoDePuntos> getUsoDePuntosList() {
+//        return usoDePuntosList;
+//    }
+//
+//    public void setUsoDePuntosList(List<UsoDePuntos> usoDePuntosList) {
+//        this.usoDePuntosList = usoDePuntosList;
+//    }
     @Override
     public int hashCode() {
         int hash = 0;
@@ -120,6 +119,16 @@ public class Conceptos implements Serializable {
     @Override
     public String toString() {
         return "pol.edu.py.primerparcialbackend.model.Conceptos[ conceptoId=" + conceptoId + " ]";
+    }
+
+    public String toJson() {
+        StringBuilder str = new StringBuilder();
+        str.append("Clientes:{\n");
+        str.append("\tconceptoId: ").append(conceptoId != null ? conceptoId : null).append(",\n");
+        str.append("\tdescripcion: ").append(descripcion != null ? descripcion : null).append(",\n");
+        str.append("\tpuntosRequeridos: ").append(puntosRequeridos != null ? puntosRequeridos : null).append(",\n");
+        str.append("}");
+        return str.toString();
     }
 
 }

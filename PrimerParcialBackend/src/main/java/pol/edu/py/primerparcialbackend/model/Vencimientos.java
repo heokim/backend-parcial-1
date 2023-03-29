@@ -1,5 +1,6 @@
 package pol.edu.py.primerparcialbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -38,9 +39,11 @@ public class Vencimientos implements Serializable {
     private Integer vencimientoId;
     @Column(name = "fecha_inicio_validez")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "es-PY", timezone = "UTC")
     private Date fechaInicioValidez;
     @Column(name = "fecha_fin_validez")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "es-PY", timezone = "UTC")
     private Date fechaFinValidez;
     @Column(name = "dias_restantes")
     private Integer diasRestantes;

@@ -1,27 +1,21 @@
 package pol.edu.py.primerparcialbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Bolsas.findByPuntajeAsignado", query = "SELECT b FROM Bolsas b WHERE b.puntajeAsignado = :puntajeAsignado"),
     @NamedQuery(name = "Bolsas.findByPuntajeUtilizado", query = "SELECT b FROM Bolsas b WHERE b.puntajeUtilizado = :puntajeUtilizado"),
     @NamedQuery(name = "Bolsas.findBySaldoDePuntos", query = "SELECT b FROM Bolsas b WHERE b.saldoDePuntos = :saldoDePuntos"),
-    @NamedQuery(name = "Bolsas.findByMontoDeLaOperaci\u00f3n", query = "SELECT b FROM Bolsas b WHERE b.montoDeLaOperaci\u00f3n = :montoDeLaOperaci\u00f3n"),
+    @NamedQuery(name = "Bolsas.findByMontoDeLaOperacion", query = "SELECT b FROM Bolsas b WHERE b.montoDeLaOperacion = :montoDeLaOperacion"),
     @NamedQuery(name = "Bolsas.findByEstado", query = "SELECT b FROM Bolsas b WHERE b.estado = :estado")})
 public class Bolsas implements Serializable {
 
@@ -48,11 +42,16 @@ public class Bolsas implements Serializable {
     @Basic(optional = false)
     @Column(name = "bolsa_id")
     private Integer bolsaId;
+    @NotNull
+    @Column(name = "cliente_id")
+    private Integer clienteId;
     @Column(name = "fecha_de_asignacion_de_puntaje")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "es-PY", timezone = "UTC")
     private Date fechaDeAsignacionDePuntaje;
     @Column(name = "fecha_de_caducidad_de_puntaje")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "es-PY", timezone = "UTC")
     private Date fechaDeCaducidadDePuntaje;
     @Basic(optional = false)
     @NotNull
@@ -66,15 +65,12 @@ public class Bolsas implements Serializable {
     private int saldoDePuntos;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "monto_de_la_operaci\u00f3n")
-    private int montoDeLaOperación;
+    @Column(name = "monto_de_la_operacion")
+    private int montoDeLaOperacion;
     @Column(name = "estado")
     private Boolean estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsaId", fetch = FetchType.EAGER)
-    private List<UsoDePuntosDetalles> usoDePuntosDetallesList;
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Clientes clienteId;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsaId", fetch = FetchType.EAGER)
+//    private List<UsoDePuntosDetalles> usoDePuntosDetallesList;
 
     public Bolsas() {
     }
@@ -83,11 +79,11 @@ public class Bolsas implements Serializable {
         this.bolsaId = bolsaId;
     }
 
-    public Bolsas(Integer bolsaId, int puntajeAsignado, int saldoDePuntos, int montoDeLaOperación) {
+    public Bolsas(Integer bolsaId, int puntajeAsignado, int saldoDePuntos, int montoDeLaOperacion) {
         this.bolsaId = bolsaId;
         this.puntajeAsignado = puntajeAsignado;
         this.saldoDePuntos = saldoDePuntos;
-        this.montoDeLaOperación = montoDeLaOperación;
+        this.montoDeLaOperacion = montoDeLaOperacion;
     }
 
     public Integer getBolsaId() {
@@ -138,12 +134,12 @@ public class Bolsas implements Serializable {
         this.saldoDePuntos = saldoDePuntos;
     }
 
-    public int getMontoDeLaOperación() {
-        return montoDeLaOperación;
+    public int getMontoDeLaOperacion() {
+        return montoDeLaOperacion;
     }
 
-    public void setMontoDeLaOperación(int montoDeLaOperación) {
-        this.montoDeLaOperación = montoDeLaOperación;
+    public void setMontoDeLaOperacion(int montoDeLaOperacion) {
+        this.montoDeLaOperacion = montoDeLaOperacion;
     }
 
     public Boolean getEstado() {
@@ -154,20 +150,19 @@ public class Bolsas implements Serializable {
         this.estado = estado;
     }
 
-    @XmlTransient
-    public List<UsoDePuntosDetalles> getUsoDePuntosDetallesList() {
-        return usoDePuntosDetallesList;
-    }
-
-    public void setUsoDePuntosDetallesList(List<UsoDePuntosDetalles> usoDePuntosDetallesList) {
-        this.usoDePuntosDetallesList = usoDePuntosDetallesList;
-    }
-
-    public Clientes getClienteId() {
+//    @XmlTransient
+//    public List<UsoDePuntosDetalles> getUsoDePuntosDetallesList() {
+//        return usoDePuntosDetallesList;
+//    }
+//
+//    public void setUsoDePuntosDetallesList(List<UsoDePuntosDetalles> usoDePuntosDetallesList) {
+//        this.usoDePuntosDetallesList = usoDePuntosDetallesList;
+//    }
+    public Integer getClienteId() {
         return clienteId;
     }
 
-    public void setClienteId(Clientes clienteId) {
+    public void setClienteId(Integer clienteId) {
         this.clienteId = clienteId;
     }
 

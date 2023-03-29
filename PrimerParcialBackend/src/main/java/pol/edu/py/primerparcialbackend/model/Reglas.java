@@ -111,7 +111,7 @@ public class Reglas implements Serializable {
     public String toString() {
         return "pol.edu.py.primerparcialbackend.model.Reglas[ reglaId=" + reglaId + " ]";
     }
-    
+
     public String toJson() {
         StringBuilder str = new StringBuilder();
         str.append("Reglas:{\n");

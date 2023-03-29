@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "37673cc1-44a5-4a5e-b58b-26d12f5b7f93",
+		"name": "PrimerParcialBackend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1- Clientes",
+			"item": [
+				{
+					"name": "Cliente por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoDocumento\":\"CI\",\r\n    \"numeroDocumento\":\"5574180\",\r\n    \"nombre\":\"Andres\",\r\n    \"apellido\":\"Heo Kim\",\r\n    \"nacionalidad\":\"Paraguaya\",\r\n    \"fechaNacimiento\":\"1999-01-01\",\r\n    \"mail\":\"andressshk@gmail.com\",\r\n    \"telefono\":\"0971850995\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clienteId\":2,\r\n    \"telefono\":\"0971850995\",\r\n    \"nombre\":\"Moises\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/clientes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"clientes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2- Conceptos",
+			"item": [
+				{
+					"name": "Concepto por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"conceptos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Conceptos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"conceptos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\":\"Descueto 15%\",\r\n    \"puntosRequeridos\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"conceptos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Concepto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"conceptoId\":1,\r\n    \"descripcion\":\"Descueto 15%\",\r\n    \"puntosRequeridos\":20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"conceptos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PrimerParcialBackend/api/conceptos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PrimerParcialBackend",
+								"api",
+								"conceptos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3- Reglas",
+			"item": []
+		},
+		{
+			"name": "4- Vencimientos",
+			"item": []
+		},
+		{
+			"name": "7- Consultas",
+			"item": []
+		},
+		{
+			"name": "8- Servicios",
+			"item": []
+		}
+	]
+}
