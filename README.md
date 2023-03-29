@@ -7,22 +7,22 @@ Proyecto relacionado a la 1ra parcial de Back-End
 
 	Clientes (clientes del sistema)
 	---------------------------------------
-	cliente_id				integer PK
+	cliente_id			integer PK
 	tipo_documento			varchar(100)
 	numero_documento		varchar(100)
-	nombre					varchar(100)
-	apellido				varchar(100)
+	nombre				varchar(100)
+	apellido			varchar(100)
 	fecha_nacimiento		date
 	nacionalidad			varchar(100)
-	mail					varchar(100)
-	teléfono				varchar(100)
+	mail				varchar(100)
+	teléfono			varchar(100)
 	---------------------------------------
 
 	REST
 		Listado de clientes: 		/api/clientes			GET
-		Un cliente por id:			/api/clientes/{id}		GET
+		Un cliente por id:		/api/clientes/{id}		GET
 		Agregar	un clientes:		/api/clientes			POST
-		Editar un cliente: 			/api/clientes			PUT
+		Editar un cliente: 		/api/clientes			PUT
 		Eliminar un cliente: 		/api/clientes/{id}		DELETE
 
 ### 2- Administración de conceptos de uso de puntos (POST,GET,PUT, DELETE)
@@ -30,32 +30,32 @@ Proyecto relacionado a la 1ra parcial de Back-End
 	Conceptos (concepto para uso de puntos)
 	---------------------------------------
 	concepto_id 			int PK
-	descripcion				varchar(100)
+	descripcion			varchar(100)
 	puntos_requeridos 		integer
 	---------------------------------------
 
 	REST
-		Listar conceptos: 		/api/conceptos			GET
-		Un concepto por id: 	/api/conceptos/{id} 	GET
+		Listar conceptos: 	/api/conceptos			GET
+		Un concepto por id: 	/api/conceptos/{id} 		GET
 		Agregar un concepto: 	/api/conceptos			POST
-		Editar un concepto:		/api/conceptos/		 	PUT
+		Editar un concepto:	/api/conceptos/		 	PUT
 		Eliminar un concepto: 	/api/conceptos/{id}		DELETE
 
 ### 3- Administración de reglas de asignación de puntos (POST,GET,PUT, DELETE)
 
 	Reglas
 	---------------------------------------
-	regla_id 						integer		PK
-	limite_inferior					integer 	null
-	limite_superior					integer		null
+	regla_id 			integer		PK
+	limite_inferior			integer 	null
+	limite_superior			integer		null
 	monto_equivalencia_por_punto	integer		not null
 	---------------------------------------
 
 	REST
-		Listar reglas: 			/api/reglas			GET
+		Listar reglas: 			/api/reglas		GET
 		Un regla por id: 		/api/reglas/{id} 	GET
-		Agregar un regla: 		/api/reglas			POST
-		Editar un regla:		/api/reglas		 	PUT
+		Agregar un regla: 		/api/reglas		POST
+		Editar un regla:		/api/reglas	 	PUT
 		Eliminar un regla: 		/api/reglas/{id}	DELETE
 
 
@@ -65,17 +65,17 @@ Proyecto relacionado a la 1ra parcial de Back-End
 	
 	Vencimientos
 	---------------------------------------
-	vencimiento_id				integer
+	vencimiento_id			integer
 	fecha_inicio_validez		date
-	fecha_fin_validez			date
-	dias_restantes				integer
+	fecha_fin_validez		date
+	dias_restantes			integer
 	---------------------------------------
 
 	REST
-		Listar vencimientos: 		/api/vencimientos			GET
+		Listar vencimientos: 		/api/vencimientos		GET
 		Un vencimiento por id: 		/api/vencimientos/{id}	 	GET
-		Agregar un vencimiento: 	/api/vencimientos			POST
-		Editar un vencimiento:		/api/vencimientos			PUT
+		Agregar un vencimiento: 	/api/vencimientos		POST
+		Editar un vencimiento:		/api/vencimientos		PUT
 		Eliminar un vencimiento: 	/api/vencimientos/{id}		DELETE
 
 	json
@@ -93,17 +93,17 @@ Proyecto relacionado a la 1ra parcial de Back-End
 ### 5- Bolsa de puntos(Estructura)
 
 	Bolsas
-	---------------------------------------
-	bolsa_id							PK
-	cliente_id							FK
+	----------------------------------------------------------------------
+	bolsa_id				PK
+	cliente_id				FK
 	fecha_de_asignacion_de_puntaje		timestamp with out zone
 	fecha_de_caducidad_de_puntaje		timestamp with out zone
-	puntaje_asignado					integer not null
-	puntaje_utilizado					integer default '0'
-	saldo_de_puntos						integer not null
-	monto_de_la_operación				integer	not null
-	estado								boolean
-	---------------------------------------
+	puntaje_asignado			integer not null
+	puntaje_utilizado			integer default '0'
+	saldo_de_puntos				integer not null
+	monto_de_la_operación			integer	not null
+	estado					boolean
+	----------------------------------------------------------------------
 
 
 ### 6-  Uso de puntos(Estructura)
@@ -138,8 +138,6 @@ Las consultas a proveer son:
 
         params: concepto_id, cliente_id, fecha_uso
 
-
-	
 #### 7.2 - bolsa de puntos por: cliente, rango de puntos
 
 	/api/consultas/bolsa 
@@ -158,9 +156,7 @@ Las consultas a proveer son:
 
 		params: nombre, apellido, cumpleanhos
 
-
 ### 8- Servicios
-
 #### 8.1 - carga de puntos (POST): se recibe el identificador de cliente y el monto de la operación, y se asigna los puntos (genera datos con la estructura del punto 5)
 
 	POST	/api/servicios/cargar_puntos
