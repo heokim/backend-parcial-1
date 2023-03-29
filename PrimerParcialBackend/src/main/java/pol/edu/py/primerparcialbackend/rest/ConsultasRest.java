@@ -19,6 +19,7 @@ import pol.edu.py.primerparcialbackend.model.UsoDePuntos;
 import pol.edu.py.primerparcialbackend.ejb.UsoDePuntosDAO;
 import pol.edu.py.primerparcialbackend.ejb.BolsasDAO;
 import pol.edu.py.primerparcialbackend.ejb.ClientesDAO;
+import pol.edu.py.primerparcialbackend.ejb.UsoDePuntosDAO;
 import pol.edu.py.primerparcialbackend.utils.DateUtils;
 
 
@@ -35,6 +36,21 @@ public class ConsultasRest {
     @Inject
     BolsasDAO bolsasDAO;
 
+    @Inject
+    UsoDePuntosDAO usoDePuntosDAO;
+
+    @GET
+    @Path("puntos")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getUsoDePuntos(
+            @QueryParam("cliente_id") int clienteId,
+            @QueryParam("concepto_id") int conceptoId,
+            @QueryParam("fecha_uso") String fechaUso
+    ) {
+        Date fecha = DateUtils.stringToDate(fechaUso, "yyyy-MM-dd");
+        return Response.ok(usoDePuntosDAO.findByClienteConceptoFechaUso(clienteId, conceptoId, fecha)).build();
+    }
+
     @GET
     @Path("bolsa")
     @Produces({MediaType.APPLICATION_JSON})
@@ -49,22 +65,6 @@ public class ConsultasRest {
     @Produces({MediaType.APPLICATION_JSON})
     public Response findClientesPorVencer(@QueryParam("dias") int dias) {
         return Response.ok(clientesDAO.findByDiasRestantesVencimiento(dias)).build();
-    }
-
-    @GET
-    @Path("puntos")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getUsoDePuntos(
-	@QueryParam("cliente_id") int cliente_id,
-	@QueryParam("concepto_id") int concepto_id,
-        @QueryParam("fecha_uso") String fecha_uso) {
-        Map<String, Object> mapParam = new HashMap<>();
-        mapParam.put("cliente_id", cliente_id);
-        mapParam.put("concepto_id", concepto_id);
-        mapParam.put("fecha", fecha_uso);
-        
-	return Response.ok(usoDePuntosDAO.findByParametrosMap(mapParam)).status(200).build();
-
     }
 
     @GET

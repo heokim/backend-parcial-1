@@ -39,11 +39,11 @@ public class Vencimientos implements Serializable {
     private Integer vencimientoId;
     @Column(name = "fecha_inicio_validez")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "es-PY", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Asuncion")
     private Date fechaInicioValidez;
     @Column(name = "fecha_fin_validez")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "es-PY", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Asuncion")
     private Date fechaFinValidez;
     @Column(name = "dias_restantes")
     private Integer diasRestantes;
@@ -110,6 +110,17 @@ public class Vencimientos implements Serializable {
     @Override
     public String toString() {
         return "pol.edu.py.primerparcialbackend.model.Vencimientos[ vencimientoId=" + vencimientoId + " ]";
+    }
+
+    public String toJson() {
+        StringBuilder str = new StringBuilder();
+        str.append("Vencimientos:{\n");
+        str.append("\tvencimientoId: ").append(vencimientoId != null ? vencimientoId : "").append(",\n");
+        str.append("\tfechaInicioValidez: ").append(fechaInicioValidez != null ? fechaInicioValidez : null).append(",\n");
+        str.append("\tfechaFinValidez: ").append(fechaFinValidez != null ? fechaFinValidez : null).append(",\n");
+        str.append("\tdiasRestantes: ").append(diasRestantes != null ? diasRestantes : null).append(",\n");
+        str.append("}");
+        return str.toString();
     }
 
 }
