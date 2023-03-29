@@ -132,29 +132,27 @@ Proyecto relacionado a la 1ra parcial de Back-End
 Este módulo contempla la consulta para el desarrollo de reportes.
 Las consultas a proveer son:
 
-	7.1 - uso de puntos por: concepto de uso, fecha de uso, cliente
+#### 7.1 - uso de puntos por: concepto de uso, fecha de uso, cliente
 
-	/api/consultas/puntos
+    /api/consultas/puntos
 
-		params: concepto_id, cliente_id, fecha_uso
+        params: concepto_id, cliente_id, fecha_uso
 
----
+
 	
-	7.2 - bolsa de puntos por: cliente, rango de puntos
+#### 7.2 - bolsa de puntos por: cliente, rango de puntos
 
 	/api/consultas/bolsa 
 
 		params: cliente_id, limite_inferior, limite_superior
 
----
-
-	7.3 - clientes con puntos a vencer en x días
+#### 7.3 - clientes con puntos a vencer en x días
 
 	/api/consultas/vencimientos
 
 		params: dias
----
-	7.4 - consulta de clientes por: nombre (aproximación), apellido (aproximación), cumpleaños
+
+#### 7.4 - consulta de clientes por: nombre (aproximación), apellido (aproximación), cumpleaños
 
 	/api/consultas/clientes
 
@@ -163,8 +161,7 @@ Las consultas a proveer son:
 
 ### 8- Servicios
 
-#### 8.1 - carga de puntos (POST): se recibe el identificador de cliente y el monto de la
-operación, y se asigna los puntos (genera datos con la estructura del punto 5)
+#### 8.1 - carga de puntos (POST): se recibe el identificador de cliente y el monto de la operación, y se asigna los puntos (genera datos con la estructura del punto 5)
 
 	POST	/api/servicios/cargar_puntos
 	Body: 
@@ -172,7 +169,6 @@ operación, y se asigna los puntos (genera datos con la estructura del punto 5)
 			cliente_id,
 			monto_carga
 		}
----
 
 #### 8.2 - utilizar puntos (POST): se recibe el identificador del cliente y el identificador del 	concepto de uso y se descuenta dicho puntaje al cliente registrando el uso de puntos 	(genera datos con la estructura del punto 6 y actualiza la del punto 5) o además debe enviar un correo electrónico al cliente como comprobante
 
@@ -184,11 +180,12 @@ operación, y se asigna los puntos (genera datos con la estructura del punto 5)
 		}
 
 	obs.: enviar por correo el objeto generado de uso_de_puntos en formato json.
----
-	8.3 - consultar cuantos puntos equivale a un monto X (GET): es un servicio informativo que devuelve la cantidad de puntos equivalente al monto proporcionado como parámetro utilizando la configuración del punto 3
+
+#### 8.3 - consultar cuantos puntos equivale a un monto X (GET): es un servicio informativo que devuelve la cantidad de puntos equivalente al monto proporcionado como parámetro utilizando la configuración del punto 3
 
 	GET 	/api/servicios/consulta_puntos
-	params: monto
+	
+		params: monto
 
 ### 9- Proceso planificado cada x horas
 	Proceso que pueda planificarse que corra cada X horas y actualice el estado de las bolsas con puntos vencidos.
