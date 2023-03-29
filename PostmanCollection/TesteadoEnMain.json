@@ -702,7 +702,7 @@
 					"response": []
 				},
 				{
-					"name": "Utilizar Puntos",
+					"name": "Utilizar Puntos + Email",
 					"request": {
 						"method": "POST",
 						"header": [],

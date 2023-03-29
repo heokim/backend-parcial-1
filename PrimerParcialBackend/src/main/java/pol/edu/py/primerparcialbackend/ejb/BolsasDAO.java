@@ -59,10 +59,14 @@ public class BolsasDAO extends AbstractDAO<Bolsas> {
         if (vencimiento == null) {
             return null; // en caso que no tenga un vencimiento que setear
         }
-        
+
         Date fechaVence = DateUtils.sumarFechaYDias(today, vencimiento.getDiasRestantes());
         bolsa.setFechaDeCaducidadDePuntaje(fechaVence);
         return this.create(bolsa);
+    }
+
+    public List<Bolsas> findOnlyActive() {
+        return em.createQuery("SELECT b FROM Bolsas b WHERE b.estado = true").getResultList();
     }
 
 }
