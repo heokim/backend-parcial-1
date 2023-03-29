@@ -7,56 +7,56 @@ Proyecto relacionado a la 1ra parcial de Back-End
 
 	Clientes (clientes del sistema)
 	---------------------------------------
-	cliente_id			integer PK
-	tipo_documento			varchar(100)
-	numero_documento		varchar(100)
-	nombre				varchar(100)
-	apellido			varchar(100)
-	fecha_nacimiento		date
-	nacionalidad			varchar(100)
-	mail				varchar(100)
-	teléfono			varchar(100)
+	cliente_id		integer PK
+	tipo_documento		varchar(100)
+	numero_documento	varchar(100)
+	nombre			varchar(100)
+	apellido		varchar(100)
+	fecha_nacimiento	date
+	nacionalidad		varchar(100)
+	mail			varchar(100)
+	teléfono		varchar(100)
 	---------------------------------------
 
 	REST
-		Listado de clientes: 		/api/clientes			GET
-		Un cliente por id:		/api/clientes/{id}		GET
-		Agregar	un clientes:		/api/clientes			POST
-		Editar un cliente: 		/api/clientes			PUT
-		Eliminar un cliente: 		/api/clientes/{id}		DELETE
+		Listado de clientes: 	/api/clientes		GET
+		Un cliente por id:	/api/clientes/{id}	GET
+		Agregar	un clientes:	/api/clientes		POST
+		Editar un cliente: 	/api/clientes		PUT
+		Eliminar un cliente: 	/api/clientes/{id}	DELETE
 
 ### 2- Administración de conceptos de uso de puntos (POST,GET,PUT, DELETE)
 
 	Conceptos (concepto para uso de puntos)
 	---------------------------------------
-	concepto_id 			int PK
-	descripcion			varchar(100)
-	puntos_requeridos 		integer
+	concepto_id 		int PK
+	descripcion		varchar(100)
+	puntos_requeridos 	integer
 	---------------------------------------
 
 	REST
-		Listar conceptos: 	/api/conceptos			GET
-		Un concepto por id: 	/api/conceptos/{id} 		GET
-		Agregar un concepto: 	/api/conceptos			POST
-		Editar un concepto:	/api/conceptos/		 	PUT
-		Eliminar un concepto: 	/api/conceptos/{id}		DELETE
+		Listar conceptos: 	/api/conceptos		GET
+		Un concepto por id: 	/api/conceptos/{id} 	GET
+		Agregar un concepto: 	/api/conceptos		POST
+		Editar un concepto:	/api/conceptos/		PUT
+		Eliminar un concepto: 	/api/conceptos/{id}	DELETE
 
 ### 3- Administración de reglas de asignación de puntos (POST,GET,PUT, DELETE)
 
 	Reglas
-	---------------------------------------
+	-------------------------------------------------------------
 	regla_id 			integer		PK
 	limite_inferior			integer 	null
 	limite_superior			integer		null
 	monto_equivalencia_por_punto	integer		not null
-	---------------------------------------
+	-------------------------------------------------------------
 
 	REST
-		Listar reglas: 			/api/reglas		GET
-		Un regla por id: 		/api/reglas/{id} 	GET
-		Agregar un regla: 		/api/reglas		POST
-		Editar un regla:		/api/reglas	 	PUT
-		Eliminar un regla: 		/api/reglas/{id}	DELETE
+		Listar reglas: 		/api/reglas		GET
+		Un regla por id: 	/api/reglas/{id} 	GET
+		Agregar un regla: 	/api/reglas		POST
+		Editar un regla:	/api/reglas	 	PUT
+		Eliminar un regla: 	/api/reglas/{id}	DELETE
 
 
 	OBSERVACION: los limites son datos opcionales.
@@ -64,12 +64,12 @@ Proyecto relacionado a la 1ra parcial de Back-End
 ### 4- Parametrización de vencimientos de puntos (POST,GET,PUT, DELETE)
 	
 	Vencimientos
-	---------------------------------------
-	vencimiento_id			integer
-	fecha_inicio_validez		date
-	fecha_fin_validez		date
-	dias_restantes			integer
-	---------------------------------------
+	----------------------------------
+	vencimiento_id		integer
+	fecha_inicio_validez	date
+	fecha_fin_validez	date
+	dias_restantes		integer
+	----------------------------------
 
 	REST
 		Listar vencimientos: 		/api/vencimientos		GET
@@ -166,7 +166,7 @@ Las consultas a proveer son:
 			monto_carga
 		}
 
-#### 8.2 - utilizar puntos (POST): se recibe el identificador del cliente y el identificador del 	concepto de uso y se descuenta dicho puntaje al cliente registrando el uso de puntos 	(genera datos con la estructura del punto 6 y actualiza la del punto 5) o además debe enviar un correo electrónico al cliente como comprobante
+#### 8.2 - utilizar puntos (POST): se recibe el identificador del cliente y el identificador del concepto de uso y se descuenta dicho puntaje al cliente registrando el uso de puntos (genera datos con la estructura del punto 6 y actualiza la del punto 5) o además debe enviar un correo electrónico al cliente como comprobante
 
 	POST 	/api/servicios/utilizar_puntos
 	Body: 
