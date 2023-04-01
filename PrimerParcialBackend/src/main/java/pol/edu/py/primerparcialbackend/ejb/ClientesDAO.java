@@ -34,7 +34,7 @@ public class ClientesDAO extends AbstractDAO<Clientes> {
         calendar.add(Calendar.DAY_OF_YEAR, dias);
 
         return em.createQuery(
-                "SELECT c FROM Clientes c, Bolsas b "
+                "SELECT DISTINCT c FROM Clientes c, Bolsas b "
                 + "WHERE b.clienteId = c.clienteId "
                 + "AND b.fechaDeCaducidadDePuntaje BETWEEN :fecha_actual AND :fecha_vencimiento "
                 + "AND b.estado = true")
