@@ -1,5 +1,11 @@
 # backend-parcial-1
 Proyecto relacionado a la 1ra parcial de Back-End
+### Integrantres
+- Andres Heo ([@heokim](https://github.com/heokim))
+- Denis Maldonado ([@denisg](https://github.com/denisg))
+- Gerardo Ortiz ([@GerardoOrtizCantero](https://github.com/GerardoOrtizCantero))
+- Laura Toche ([@lautroche99](https://github.com/lautroche99))
+- Pedro Larrea ([@pedroLarrea](https://github.com/pedroLarrea))
 
 ## Resumen de los Modulos
 
